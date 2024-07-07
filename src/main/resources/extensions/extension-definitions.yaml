@@ -1,0 +1,9 @@
+apiVersion: plugin.halo.run/v1alpha1
+kind: ExtensionDefinition
+metadata:
+  name: waline-comment
+spec:
+  className: xin.wenjing.waline.WalineComment
+  extensionPointName: comment-widget
+  displayName: "waline评论组件"
+  description: "由作者 dreamChaser的小屋 提供的第三方评论组件"

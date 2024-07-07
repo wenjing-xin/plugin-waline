@@ -1,0 +1,100 @@
+apiVersion: v1alpha1
+kind: Setting
+metadata:
+  name: plugin-waline-setting
+spec:
+  forms:
+    - group: baseConf
+      label: 基本配置
+      formSchema:
+        - $formkit: url
+          name: walineUrl
+          label: waline 部署地址
+          value: "https://waline.domain.com"
+          help: 例如https://waline.domain.com
+          validation: required
+        - $formkit: radio
+          name: staticResourceType
+          id: staticResourceType
+          key: staticResourceType
+          label: 静态资源
+          help: 插件的js/css资源是最新版本(V3以上均可使用插件的js/css资源），如果你使用的不是最新版本请引入自己的js文件。
+          value: false
+          options:
+            - value: true
+              label: 自引入静态资源
+            - value: false
+              label: 最新版本静态资源
+        - $formkit: url
+          if: $get(staticResourceType).value
+          name: jsUrl
+          label: waline的js资源地址
+          value: "https://unpkg.com/@waline/client@v3/dist/waline.js"
+          help:
+          validation: required
+        - $formkit: url
+          if: $get(staticResourceType).value
+          name: cssUrl
+          label: waline的css资源地址
+          value: "https://unpkg.com/@waline/client@v3/dist/waline.css"
+          help:
+          validation: required
+        - $formkit: text
+          name: lightDarkMode
+          label: 暗黑模式适配
+          help:  填入CSS选择器会在对应选择器生效时启用夜间模式，例如hao主题的明暗切换选择器为：html[data-theme="dark"]；设置 'auto' 会根据设备暗黑模式自适应，详情参考https://waline.js.org/reference/client/props.html#dark
+          value: 'auto'
+          validation: required
+        - $formkit: code
+          name: locale
+          height: 200px
+          label: 自定义客户端语言和文字
+          placeholder: 请输入json格式数据
+          value: "{'placeholder': '欢迎评论', 'sofa': '来发评论吧~1'}"
+          help: "格式：{'placeholder': '欢迎评论', 'sofa': '来发评论吧~1'} 更多请查看文档：https://waline.js.org/cookbook/customize/locale.html#%E4%BE%8B%E5%AD%90"
+          language: json
+        - $formkit: radio
+          name: enableReaction
+          id: enableReaction
+          key: enableReaction
+          label: 是否开启页面内容反应
+          help:
+          value: false
+          options:
+            - value: true
+              label: 开启
+            - value: false
+              label: 关闭
+        - $formkit: select
+          if: $get(enableReaction).value
+          name: reactionMode
+          id: reactionMode
+          key: reactionMode
+          label: 内容反应表情类型
+          value: default
+          options:
+            - label: 默认
+              value: default
+            - label: 自定义
+              value: custom
+        - $formkit: code
+          if: $get(reactionMode).value == custom
+          name: customReaction
+          value: "['https://domaim.com/favico.ico']"
+          height: 200px
+          label: 自定义表情内容
+          placeholder: 请输入
+          help: 格式示例：["图片地址1","图片地址2","图片地址3"]
+          language: json
+        - $formkit: radio
+          name: enablePageView
+          id: enablePageView
+          key: enablePageView
+          label: 是否开启页面浏览量统计
+          help:
+          value: false
+          options:
+            - value: true
+              label: 开启
+            - value: false
+              label: 关闭
