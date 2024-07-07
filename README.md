@@ -2,6 +2,10 @@
 
 为 halo2.x 集成 waline 评论系统
 
+- 支持自定义内容反馈配置
+- 支持自定义客户端语言和文字
+- 适配明暗主题切换模式
+
 ##  1、部署 waline
 推荐 docker-compose 方式部署，其他方式参考文档：https://waline.js.org/guide/get-started 
 
