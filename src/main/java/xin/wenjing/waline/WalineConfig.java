@@ -3,6 +3,7 @@ package xin.wenjing.waline;
 import lombok.Data;
 import reactor.core.publisher.Mono;
 import run.halo.app.plugin.ReactiveSettingFetcher;
+import java.util.List;
 
 /**
  * 功能描述
@@ -14,6 +15,10 @@ public class WalineConfig {
 
     public static Mono<ConfigDetail> fetchWalineBaseConf(ReactiveSettingFetcher settingFetcher){
         return  settingFetcher.fetch(ConfigDetail.GROUP, ConfigDetail.class).defaultIfEmpty(new ConfigDetail());
+    }
+
+    public static Mono<AdvanceSettings> fetchWalineAdvanceConf(ReactiveSettingFetcher settingFetcher){
+        return  settingFetcher.fetch(AdvanceSettings.GROUP, AdvanceSettings.class).defaultIfEmpty(new AdvanceSettings());
     }
 
     @Data
@@ -29,6 +34,19 @@ public class WalineConfig {
         private String reactionMode;
         private String customReaction ;
         private boolean enablePageView;
+    }
+
+    @Data
+    static class AdvanceSettings{
+        public static final String GROUP = "advanceSettings";
+        private boolean adaptLsdPlugin;
+        private boolean adaptMultiComment;
+        private List<MultiCommentPages> multiCommentPage;
+
+        @Data
+        public static class MultiCommentPages{
+            private String templateName;
+        }
     }
 
 }
