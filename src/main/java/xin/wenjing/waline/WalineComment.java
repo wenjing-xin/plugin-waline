@@ -36,7 +36,6 @@ public class WalineComment implements CommentWidget {
         WalineConfig.ConfigDetail configDetail = WalineConfig.fetchWalineBaseConf(settingFetcher).blockOptional().orElseThrow();
         WalineConfig.AdvanceSettings advanceConfig = WalineConfig.fetchWalineAdvanceConf(settingFetcher).blockOptional().orElseThrow();
         String multiCommentDom = multiCommentDomId(tag, context, advanceConfig.isAdaptMultiComment(), advanceConfig.getMultiCommentPage());
-        System.out.println( tag.getAttribute("name") + "============" + multiCommentDom );
         structureHandler.replaceWith(walineClientScript(configDetail, multiCommentDom, context), false);
     }
 
@@ -115,11 +114,9 @@ public class WalineComment implements CommentWidget {
      * @return
      */
     private String multiCommentDomId(IProcessableElementTag tag, ITemplateContext context, boolean isAdaptMultiComment, List<WalineConfig.AdvanceSettings.MultiCommentPages> multiCommentPage){
-
         if(!isAdaptMultiComment){
             return null;
         }
-
         String templateId = getTemplateId(context);
         List<WalineConfig.AdvanceSettings.MultiCommentPages> patchTemplate = multiCommentPage
             .stream()
@@ -128,7 +125,6 @@ public class WalineComment implements CommentWidget {
         if(patchTemplate.size() == 0){
             return null;
         }
-
         IAttribute groupAttribute = tag.getAttribute("group");
         IAttribute kindAttribute = tag.getAttribute("kind");
         IAttribute nameAttribute = tag.getAttribute("name");
