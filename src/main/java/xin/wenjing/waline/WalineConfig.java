@@ -39,7 +39,6 @@ public class WalineConfig {
     @Data
     static class AdvanceSettings{
         public static final String GROUP = "advanceSettings";
-        private boolean adaptLsdPlugin;
         private boolean adaptMultiComment;
         private List<MultiCommentPages> multiCommentPage;
 

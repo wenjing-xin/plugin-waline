@@ -6,4 +6,4 @@ spec:
   className: xin.wenjing.waline.WalineComment
   extensionPointName: comment-widget
   displayName: "waline评论组件"
-  description: "由作者 dreamChaser的小屋 提供的第三方评论组件"
+  description: "由作者 webjing 提供的第三方评论组件"

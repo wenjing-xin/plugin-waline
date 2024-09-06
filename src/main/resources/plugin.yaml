@@ -6,7 +6,7 @@ spec:
   enabled: true
   requires: ">=2.15.0"
   author:
-    name: dreamChaser的小屋
+    name: webjing
     website: https://blog.wenjing.xin
   logo: favicon.ico
   homepage: https://github.com/halo-dev/plugin-starter#readme
